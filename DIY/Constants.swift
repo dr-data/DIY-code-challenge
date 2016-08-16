@@ -55,8 +55,10 @@ public class dataClass {
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
             
-            if let jsonData = self.nsdataToJSON(data!) {
-                self.dataDelegate?.passJSON(jsonData)
+            if let data = data {
+                if let jsonData = self.nsdataToJSON(data) {
+                    self.dataDelegate?.passJSON(jsonData)
+                }
             }
             
         }).resume()
