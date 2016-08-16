@@ -144,23 +144,23 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         
         self.titleLabel.pinToTopEdgeOfSuperview(offset: 10)
         self.titleLabel.centerHorizontallyInSuperview()
-        self.titleLabel.sizeToWidth(self.contentView.frame.size.width - 50)
+        self.titleLabel.sizeToWidth(self.contentView.frame.size.width - 30)
         
         self.contentView.addSubview(scrollView)
         scrollView.centerHorizontallyInSuperview()
         scrollView.positionBelowItem(titleLabel, offset: 20)
         scrollView.sizeToHeight(200 + 50 + mediaHeight)
-        scrollView.sizeToWidth(self.contentView.frame.size.width - 40)
-        scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width - 40, 1000)
+        scrollView.sizeToWidth(self.contentView.frame.size.width - 20)
+        scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width - 20, 1000)
         
         scrollView.addSubview(clearView)
         clearView.pinToTopEdgeOfSuperview()
-        clearView.sizeToWidth(self.contentView.frame.size.width - 40)
+        clearView.sizeToWidth(self.contentView.frame.size.width - 20)
         clearView.sizeToHeight(mediaHeight)
         clearView.centerHorizontallyInSuperview()
         
         scrollView.addSubview(middleSection)
-        middleSection.sizeToWidth(self.contentView.frame.size.width - 40)
+        middleSection.sizeToWidth(self.contentView.frame.size.width - 20)
         middleSection.sizeToHeight(50)
         middleSection.positionBelowItem(clearView)
         middleSection.centerHorizontallyInSuperview()
@@ -185,11 +185,11 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         scrollView.addSubview(tableView)
         tableView.positionBelowItem(middleSection)
         tableView.pinToSideEdgesOfSuperview()
-        tableView.sizeToWidth(self.contentView.frame.size.width - 40)
+        tableView.sizeToWidth(self.contentView.frame.size.width - 20)
         tableView.sizeToHeight(200)
         
         scrollView.addSubview(commentButton)
-        commentButton.sizeToWidth(self.contentView.frame.size.width - 40)
+        commentButton.sizeToWidth(self.contentView.frame.size.width - 20)
         commentButton.sizeToHeight(50)
         commentButton.pinBottomEdgeToBottomEdgeOfItem(self.tableView, offset: 0)
         commentButton.centerHorizontallyInSuperview()
@@ -254,7 +254,7 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         let layer = AVPlayerLayer()
         layer.player = player
         layer.videoGravity = AVLayerVideoGravityResizeAspect
-        layer.frame = CGRectMake(0, 0, self.contentView.frame.size.width - 40, mediaHeight)
+        layer.frame = CGRectMake(0, 0, self.contentView.frame.size.width - 20, mediaHeight)
         layer.backgroundColor = UIColor.clearColor().CGColor
         layer.videoGravity = AVLayerVideoGravityResizeAspect
         
@@ -279,7 +279,7 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
                 imageView.pinToTopEdgeOfSuperview()
                 imageView.pinToSideEdgesOfSuperview()
                 imageView.sizeToHeight(self.mediaHeight)
-                imageView.sizeToWidth(self.contentView.frame.size.width - 40)
+                imageView.sizeToWidth(self.contentView.frame.size.width - 20)
                 imageView.contentMode = .ScaleToFill
         }
     }
