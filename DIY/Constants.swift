@@ -48,7 +48,7 @@ public class dataClass {
         return nil
     }
     
-    func getPosts() {
+    func getPosts() {        
         let url = NSURL(string: Constants.Keys.getURL)
         let request = NSMutableURLRequest(URL: url!, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5.0)
         request.setValue(Constants.Keys.headerValue, forHTTPHeaderField: Constants.Keys.headerField)

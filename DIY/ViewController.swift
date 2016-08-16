@@ -45,12 +45,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear(animated)
         
         if (dataClass.sharedInstance.jSON == nil) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            self.view.addSubview(indicator)
+            indicator.centerInSuperview()
+            indicator.startAnimating()
+            
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 dataClass.sharedInstance.getPosts()
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                indicator.stopAnimating()
+                   self.tableView.reloadData()
+                }
             }
         }
         else {
             self.jSON = dataClass.sharedInstance.jSON
+            self.tableView.reloadData()
         }
     }
     

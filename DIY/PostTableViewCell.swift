@@ -258,10 +258,10 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         layer.backgroundColor = UIColor.clearColor().CGColor
         layer.videoGravity = AVLayerVideoGravityResizeAspect
         
-        dispatch_async(dispatch_get_main_queue()) {
+        //dispatch_async(dispatch_get_main_queue()) {
                 self.scrollView.layer.addSublayer(layer)
                 player.play()
-        }
+        //}
     }
     
     func setMainImage(url: String) {
@@ -273,14 +273,14 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
         let imageView = UIImageView(image: image)
         
         // weak self first?
-        dispatch_async(dispatch_get_main_queue()) {
+       // dispatch_async(dispatch_get_main_queue()) {
                 self.scrollView.addSubview(imageView)
                 imageView.pinToTopEdgeOfSuperview()
                 imageView.pinToSideEdgesOfSuperview()
                 imageView.sizeToHeight(self.mediaHeight)
                 imageView.sizeToWidth(self.contentView.frame.size.width - 40)
                 imageView.contentMode = .ScaleToFill
-        }
+      //  }
     }
     
     func commentButtonPressed() {
