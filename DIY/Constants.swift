@@ -36,6 +36,8 @@ public protocol ViewControllerDelegate {
 
 public class dataClass {
     var dataDelegate: DataDelegate? = nil
+    var jSON : AnyObject?
+    static let sharedInstance = dataClass()
     
     func nsdataToJSON(data: NSData) -> AnyObject? {
         do {
@@ -57,6 +59,7 @@ public class dataClass {
             
             if let data = data {
                 if let jsonData = self.nsdataToJSON(data) {
+                    self.jSON = jsonData
                     self.dataDelegate?.passJSON(jsonData)
                 }
             }
@@ -64,9 +67,9 @@ public class dataClass {
         }).resume()
     }
     
-    func getCaption(json: AnyObject, index: Int) -> String {
+    func getCaption(index: Int) -> String {
         
-        let json = JSON(json)
+        let json = JSON(self.jSON!)
         
         if let response = json["response"][index]["caption"].string {
             if (response != "Optional(<null>)") {
@@ -81,9 +84,9 @@ public class dataClass {
         }
     }
     
-    func getNumComments(json: AnyObject, index: Int) -> Int {
+    func getNumComments(index: Int) -> Int {
         
-        let json = JSON(json)
+        let json = JSON(self.jSON!)
         
         if let response = json["response"][index]["num_comments"].int {
             return response
@@ -93,8 +96,8 @@ public class dataClass {
         }
     }
     
-    func getPostJSON(json: AnyObject, index: Int) -> AnyObject? {
-        let json = JSON(json)
+    func getPostJSON(index: Int) -> AnyObject? {
+        let json = JSON(self.jSON!)
         if let response = json["response"][index].dictionaryObject {
             return response
         }
@@ -145,8 +148,8 @@ public class dataClass {
         }
     }
     
-    func getMediaTypefromJSON(json: AnyObject, index: Int) -> String {
-        let json = JSON(json)
+    func getMediaTypefromJSON(index: Int) -> String {
+        let json = JSON(self.jSON!)
         if let response = json["response"][index]["media"]["type"].string {
             return response
         }
@@ -156,8 +159,8 @@ public class dataClass {
 
     }
     
-    func getMediaURLfromJSON(json: AnyObject, index: Int) -> String {
-        let json = JSON(json)
+    func getMediaURLfromJSON(index: Int) -> String {
+        let json = JSON(self.jSON!)
         if let response = json["response"][index]["media"]["small"].string {
             return response
         }
@@ -166,8 +169,8 @@ public class dataClass {
         }
     }
     
-    func getNumLikes(json: AnyObject, index: Int) -> NSNumber {
-        let json = JSON(json)
+    func getNumLikes(index: Int) -> NSNumber {
+        let json = JSON(self.jSON!)
         if let response = json["response"][index]["num_likes"].number {
             return response
         }

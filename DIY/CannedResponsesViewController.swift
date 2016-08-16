@@ -11,7 +11,6 @@ import UIKit
 class CannedResponsesViewController: UIViewController {
     
     let postId : NSNumber
-    var dataModel = dataClass()
     
     // MARK: - Init
     
@@ -74,17 +73,17 @@ class CannedResponsesViewController: UIViewController {
     }
     
     func commentButtonPressed() {
-        dataModel.makePostRequest(postId, comment: (commentButton.titleLabel?.text)!)
+        dataClass.sharedInstance.makePostRequest(postId, comment: (commentButton.titleLabel?.text)!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func commentButtonPressed2() {
-        dataModel.makePostRequest(postId, comment: (commentButton2.titleLabel?.text)!)
+        dataClass.sharedInstance.makePostRequest(postId, comment: (commentButton2.titleLabel?.text)!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func commentButtonPressed3() {
-        dataModel.makePostRequest(postId, comment: (commentButton3.titleLabel?.text)!)
+        dataClass.sharedInstance.makePostRequest(postId, comment: (commentButton3.titleLabel?.text)!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

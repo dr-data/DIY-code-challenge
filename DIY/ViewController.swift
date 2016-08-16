@@ -31,7 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return tableView
     }()
 
-    var dataModel = dataClass()
     var jSON : AnyObject?
     var viewControllerDelegate: ViewControllerDelegate? = nil
     
@@ -39,15 +38,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         self.view.backgroundColor = Constants.Colors.BlueGray
         self.navigationController?.navigationBarHidden = true
-        dataModel.dataDelegate = self
+        dataClass.sharedInstance.dataDelegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (dataClass.sharedInstance.jSON == nil) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                dataClass.sharedInstance.getPosts()
+            }
+        }
+        else {
+            self.jSON = dataClass.sharedInstance.jSON
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            self.dataModel.getPosts()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,7 +64,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func LayoutViews() {
-        
         tableView.pinToEdgesOfSuperview()
         tableView.sizeToHeight(self.view.frame.size.height)
         tableView.sizeToWidth(self.view.frame.size.width)
@@ -94,14 +101,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if let cell = cell {
             cell.viewControllerDelegate = self
-            if let loadedJSON = jSON {
-                cell.postJSON = dataModel.getPostJSON(loadedJSON, index: indexPath.row)
-                let cellTitle = dataModel.getCaption(loadedJSON, index: indexPath.row)
-                cell.numComments = dataModel.getNumComments(loadedJSON, index: indexPath.row)
-                cell.likesLabel.text = dataModel.getNumLikes(loadedJSON, index: indexPath.row).stringValue
+            if let loadedJSON = jSON { // to not have to check in model
+                cell.postJSON = dataClass.sharedInstance.getPostJSON(indexPath.row)
+                let cellTitle = dataClass.sharedInstance.getCaption(indexPath.row)
+                cell.numComments = dataClass.sharedInstance.getNumComments(indexPath.row)
+                cell.likesLabel.text = dataClass.sharedInstance.getNumLikes(indexPath.row).stringValue
                 
-                let mediaType = dataModel.getMediaTypefromJSON(loadedJSON, index: indexPath.row)
-                let mediaString = dataModel.getMediaURLfromJSON(loadedJSON, index: indexPath.row)
+                let mediaType = dataClass.sharedInstance.getMediaTypefromJSON(indexPath.row)
+                let mediaString = dataClass.sharedInstance.getMediaURLfromJSON(indexPath.row)
                 
                 if (mediaType == "image") {
                     cell.setMainImage(mediaString)

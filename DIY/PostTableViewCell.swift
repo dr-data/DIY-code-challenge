@@ -13,7 +13,6 @@ import AVKit
 class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
     
     var viewControllerDelegate: ViewControllerDelegate? = nil
-    var dataModel = dataClass()
     var postJSON : AnyObject?
     
     let mediaHeight : CGFloat = 300.00
@@ -266,7 +265,12 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
     }
     
     func setMainImage(url: String) {
-        let imageView = UIImageView(image: UIImage(data: NSData(contentsOfURL: NSURL(string: url)!)!))
+        
+        let realURL = NSURL(string: url)
+        let data = NSData(contentsOfURL: realURL!)
+        let image = UIImage(data: data!)
+        
+        let imageView = UIImageView(image: image)
         
         // weak self first?
         dispatch_async(dispatch_get_main_queue()) {
@@ -281,7 +285,7 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
     
     func commentButtonPressed() {
         if let postJSON = postJSON {
-            let postID = dataModel.getPostIDfromJSON(postJSON)
+            let postID = dataClass.sharedInstance.getPostIDfromJSON(postJSON)
             viewControllerDelegate?.showViewController(postID)
         }
     }
