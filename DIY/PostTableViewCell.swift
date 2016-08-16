@@ -222,30 +222,6 @@ class PostTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSo
             cell?.selectionStyle = .None
         }
         
-//        if (indexPath.row == 0) {
-//            cell!.titleLabel.text = "BAK3R"
-//            cell!.detail.text = "2 months ago"
-//            cell!.message.text = "Oh yum! That looks delicious"
-//        }
-//        
-//        if (indexPath.row == 1) {
-//            cell!.titleLabel.text = "Ant Nat"
-//            cell!.detail.text = "2 months ago"
-//            cell!.message.text = "Thanks😉"
-//        }
-//        
-//        if (indexPath.row == 2) {
-//            cell!.titleLabel.text = "Kerri"
-//            cell!.detail.text = "Last month"
-//            cell?.message.text = "🙀That looks SO SO good! What kind of cake is that? @antnat"
-//        }
-//        
-//        if (indexPath.row == 3) {
-//            cell!.titleLabel.text = "Ant Nat"
-//            cell!.detail.text = "Last month"
-//            cell?.message.text = "It's a chocolate snowball"
-//        }
-        
         return cell!
     }
     
